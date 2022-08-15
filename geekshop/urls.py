@@ -15,10 +15,24 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from product import views
+from django.conf import settings
+from django.conf.urls.static import static
+from product import views as viewsProduct
+from core import views as viewsCore
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.homepage),
-    path('pomidor/', views.pomidor)
-]
+    path('categories/', viewsProduct.categories_view, name="categories"),
+    path('category/<int:id>/', viewsProduct.category_detail, name="category"),
+    path('vegetables/<id>/', viewsProduct.vegetable_detail, name='vegetable-detail'),
+    path('vegetables/update/<id>/', viewsProduct.vegetable_update, name='vegetable-update'),
+    path('vegetables/delete/<id>/', viewsProduct.vegetable_delete, name='vegetable-delete'),
+    path('vegetable-add/', viewsProduct.vegetable_add, name='vegetable-add'),
+    path('feedback', viewsCore.feedback_view, name='feedback'),
+    path('feedback_form', viewsCore.feedback_form_view, name='feedback_form'),
+    path('about/', viewsProduct.AboutView.as_view(), name='about'),
+    path('price/', viewsCore.price_view, name='price'),
+    path('signin/', viewsCore.sign_in, name='sign-in'),
+    path('', viewsProduct.homepage),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

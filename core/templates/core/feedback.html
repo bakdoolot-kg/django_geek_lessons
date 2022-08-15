@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  <div style="max-width: 500px; margin: 60px auto;">
+  <form style="display: flex; flex-direction: column;" method="POST">
+    {% csrf_token %}
+    <input name="first_name" type="text" placeholder="Имя">
+    <input name="rating" type="number" placeholder="Оценки">
+    <textarea name="text" id="" cols="30" rows="3"></textarea>
+    <input name="contact" type="tel" placeholder="Номер телефона">
+    <input type="datetime-local">
+    <button>Отправить</button>
+  </form>
+  </div>
+
+{% endblock %}

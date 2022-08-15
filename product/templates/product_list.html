@@ -1,17 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>product list</title>
-</head>
-<body>
-    <ul>
-        {% for item in all_vegetables %}
-            <li>
-                <p>{{ item.name }}</p>
-                <span>{{ item.description }}</span>
-            </li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+{#<a href="http://127.0.0.1:8000/categories/">Categories</a>#}
+{#<a href="http://127.0.0.1:8000/admin/">Admin</a>#}
+<h1></h1>
+<div class="container">
+  <h2>Товары</h2>
+
+  <button class="btn btn-success mb-5"><a href="{% url 'vegetable-add' %}" class="text-decoration-none link-light">Добавить товар</a></button>
+
+  {% for item in all_vegetables %}
+
+      <div class="card">
+        <div class="card-body">
+          <a class=card-title" href="/vegetables/{{ item.id }}">
+            {{ item.name }}
+          </a>
+          <p class="card-text">{{ item.description }}</p>
+        </div>
+
+      </div>
+  {% endfor %}
+</div>
+{% endblock %}
